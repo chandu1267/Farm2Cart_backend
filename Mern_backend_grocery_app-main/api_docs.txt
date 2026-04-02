@@ -1,0 +1,28 @@
+
+API's
+export const productUrl = "http://13.235.76.33:3000/product"
+export const imageUrl = "http://13.235.76.33:3000"
+export const adminUrl = "http://13.235.76.33:3000/admin"
+export const emailUrl = "http://13.235.76.33:3000/email"
+export const cartUrl = "http://13.235.76.33:3000/cart"
+
+Product Routes
+router.post("/add-product", upload.single("image"), controller.createProduct)
+router.get("/all-products", controller.getProducts)
+router.get("/search",searchProducts.searchProducts)
+router.get("/:id", controller.productById)
+
+Admin Routes
+router.post("/register",controller.register)
+router.post("/login",controller.login)
+
+Email Routes
+router.post("/send-otp", userController.sendOtp)
+router.post("/verify-otp", userController.verifyOtp)
+
+Cart Routes
+router.get("/details",middle.userMiddleware, cartController.getCart)
+router.post("/add-to-cart",middle.userMiddleware, cartController.addToCart)
+router.put("/update",middle.userMiddleware, cartController.updateQuantity)
+router.delete("/delete/:productId",middle.userMiddleware, cartController.removeFromCart)
+
