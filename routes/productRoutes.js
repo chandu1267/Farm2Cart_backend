@@ -2,7 +2,7 @@
 const express = require("express")
 const controller = require("../controllers/productController")
 // const upload = require("../middlewares/imageMiddleware")
-const upload = require("../middleware/upload");
+const upload = require("../middlewares/upload");
 
 const searchProducts = require("../controllers/searchController")
 
