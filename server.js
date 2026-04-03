@@ -5,6 +5,7 @@ const productRouter = require("./routes/productRoutes")
 const adminRouter = require("./routes/adminRoutes")
 const emailRouter = require("./routes/userRoutes")
 const cartRouter = require("./routes/cartRoutes")
+const path = require("path")
 const cors = require("cors")
 
 const PORT = 3000;
@@ -19,6 +20,7 @@ app.use(cors({
   credentials: true
 }));
 
+
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>{
     console.log("db connected")
@@ -26,7 +28,14 @@ mongoose.connect(process.env.MONGO_URI)
 .catch((error)=>{
     console.log(error)
 })
-app.use("/uploads", express.static("uploads"))
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.get("/check-file", (req, res) => {
+  const fs = require("fs");
+  const files = fs.readdirSync("uploads");
+  res.json(files);
+});
 app.use("/product", productRouter)
 app.use("/admin", adminRouter)
 app.use("/email", emailRouter)
