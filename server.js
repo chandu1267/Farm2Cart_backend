@@ -12,7 +12,11 @@ const app = express()
 dotEnv.config()
 app.use(express.json())
 app.use(cors({
-  origin: "https://farm2-cart-backend.vercel.app/", // later replace with frontend URL
+  origin: [
+    "http://localhost:5173",
+    "https://farm2-cart-backend.vercel.app"
+  ],
+  credentials: true
 }));
 
 mongoose.connect(process.env.MONGO_URI)
